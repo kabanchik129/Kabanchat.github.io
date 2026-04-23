@@ -394,8 +394,7 @@
     <script>
         const SUPABASE_URL = 'https://urzphjntsbwsnypwirok.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVyenphamf0c2J3c255cHdpcm9rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY5NjcyMDksImV4cCI6MjA5MjU0MzIwOX0.iH7-yGwF2nPFe7hQzy8Dmgj1L2gShxHTKA7yml6zv8M';
-        const { createClient } = window.supabase;
-        const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
         class App {
             constructor() {
