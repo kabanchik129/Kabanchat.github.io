@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 
 // ============= SUPABASE КОНФИГУРАЦИЯ (ТОЛЬКО ОДИН РАЗ!) =============
-const SUPABASE_URL = 'https://YOUR_PROJECT_ID.supabase.co';
-const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY';
+const SUPABASE_URL = 'https://peymwntazavsptycyxtp.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBleW13bnRhemF2c3B0eWN5eHRwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwMjI4MTIsImV4cCI6MjA5MjU5ODgxMn0.yv3B3wPCllnzoam0gMqEicVJrSFSjP4oRNiL8nrpHeY';
 
 let supabase = null;
 
