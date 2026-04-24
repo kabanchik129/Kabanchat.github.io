@@ -24,13 +24,13 @@ function App() {
 
   useEffect(() => {
     const checkAuth = async () => {
-      const sb = await initSupabase();
+      await initSupabase();
       const stored = localStorage.getItem('user');
       if (stored) {
         const user = JSON.parse(stored);
         setCurrentUser(user);
-        setPage(user.username === 'admin' ? 'admin' : 'feed');
-        setIsAdmin(user.username === 'admin');
+        setPage(user.username === 'kaban' ? 'admin' : 'feed');
+        setIsAdmin(user.username === 'kaban');
       }
       setLoading(false);
     };
@@ -91,8 +91,8 @@ function App() {
       {!currentUser ? (
         <AuthPage onAuth={(user) => {
           setCurrentUser(user);
-          setIsAdmin(user.username === 'admin');
-          setPage(user.username === 'admin' ? 'admin' : 'feed');
+          setIsAdmin(user.username === 'kaban');
+          setPage(user.username === 'kaban' ? 'admin' : 'feed');
         }} />
       ) : isAdmin ? (
         <AdminPanel user={currentUser} />
@@ -128,10 +128,10 @@ function AuthPage({ onAuth }) {
 
       if (mode === 'login') {
         // Проверка админа
-        if (formData.username === 'admin' && formData.password === '123') {
+        if (formData.username === 'kaban' && formData.password === '123') {
           const adminUser = {
             id: 'admin-id',
-            username: 'admin',
+            username: 'kaban',
             full_name: 'Администратор',
             email: 'admin@kaban.chat'
           };
@@ -181,7 +181,7 @@ function AuthPage({ onAuth }) {
           .select();
 
         if (err) {
-          setError(err.message);
+          setError(err.message || 'Ошибка при регистрации');
           setLoading(false);
           return;
         }
@@ -191,7 +191,7 @@ function AuthPage({ onAuth }) {
         onAuth(newUser);
       }
     } catch (err) {
-      setError('Ошибка: ' + err.message);
+      setError('Ошибка: ' + (err.message || 'Неизвестная ошибка'));
     }
     setLoading(false);
   };
@@ -271,7 +271,7 @@ function AuthPage({ onAuth }) {
         </form>
 
         <div className="auth-footer">
-          <p>📝 Демо: admin / 123</p>
+          <p>📝 Демо: kaban / 123</p>
         </div>
       </div>
     </div>
@@ -298,11 +298,11 @@ function FeedPage({ user }) {
         .order('created_at', { ascending: false })
         .limit(50);
 
-      if (!error) {
-        setPosts(data || []);
+      if (!error && data) {
+        setPosts(data);
       }
     } catch (err) {
-      console.error(err);
+      console.error('Ошибка загрузки постов:', err);
     }
     setLoading(false);
   };
@@ -321,12 +321,39 @@ function FeedPage({ user }) {
         }])
         .select('*, users(*)');
 
-      if (!error) {
+      if (!error && data) {
         setPosts([data[0], ...posts]);
         setNewPost('');
       }
     } catch (err) {
-      console.error(err);
+      console.error('Ошибка создания поста:', err);
+    }
+  };
+
+  const handleLike = async (postId) => {
+    try {
+      const sb = await initSupabase();
+      const { data: existingLike, error: checkError } = await sb
+        .from('post_likes')
+        .select('id')
+        .eq('post_id', postId)
+        .eq('user_id', user.id)
+        .maybeSingle();
+
+      if (existingLike) {
+        // Удалить лайк
+        await sb.from('post_likes').delete().eq('id', existingLike.id);
+      } else {
+        // Добавить лайк
+        await sb.from('post_likes').insert([{
+          post_id: postId,
+          user_id: user.id
+        }]);
+      }
+      
+      loadPosts();
+    } catch (err) {
+      console.error('Ошибка с лайком:', err);
     }
   };
 
@@ -357,15 +384,15 @@ function FeedPage({ user }) {
                 <div className="post-author">
                   <span className="avatar">👤</span>
                   <div>
-                    <h3>{post.users.full_name}</h3>
-                    <span className="username">@{post.users.username}</span>
+                    <h3>{post.users?.full_name || 'Неизвестный'}</h3>
+                    <span className="username">@{post.users?.username || 'unknown'}</span>
                   </div>
                 </div>
                 <span className="post-time">{new Date(post.created_at).toLocaleDateString('ru-RU')}</span>
               </div>
               <p className="post-content">{post.content}</p>
               <div className="post-actions">
-                <button className="action-btn">❤️ Нравится ({post.likes_count})</button>
+                <button className="action-btn" onClick={() => handleLike(post.id)}>❤️ Нравится ({post.likes_count || 0})</button>
                 <button className="action-btn">💬 Комментировать</button>
                 <button className="action-btn">➡️ Поделиться</button>
               </div>
@@ -379,52 +406,28 @@ function FeedPage({ user }) {
 
 // ============= MESSENGER PAGE =============
 function MessengerPage({ user }) {
-  const [chats, setChats] = useState([]);
+  const [users, setUsers] = useState([]);
   const [selectedChat, setSelectedChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
-  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
-    loadChats();
     loadUsers();
   }, []);
 
   useEffect(() => {
     if (selectedChat) {
       loadMessages(selectedChat);
+      const interval = setInterval(() => loadMessages(selectedChat), 2000);
+      return () => clearInterval(interval);
     }
   }, [selectedChat]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
-
-  const loadChats = async () => {
-    try {
-      const sb = await initSupabase();
-      const { data, error } = await sb
-        .from('messages')
-        .select('*, users(*)')
-        .or(`sender_id.eq.${user.id},recipient_id.eq.${user.id}`)
-        .order('created_at', { ascending: false });
-
-      if (!error && data) {
-        const chatMap = new Map();
-        data.forEach(msg => {
-          const otherId = msg.sender_id === user.id ? msg.recipient_id : msg.sender_id;
-          if (!chatMap.has(otherId)) {
-            chatMap.set(otherId, msg);
-          }
-        });
-        setChats(Array.from(chatMap.values()));
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
   const loadUsers = async () => {
     try {
@@ -433,13 +436,13 @@ function MessengerPage({ user }) {
         .from('users')
         .select('*')
         .neq('id', user.id)
-        .limit(20);
+        .limit(50);
 
-      if (!error) {
-        setUsers(data || []);
+      if (!error && data) {
+        setUsers(data);
       }
     } catch (err) {
-      console.error(err);
+      console.error('Ошибка загрузки пользователей:', err);
     }
     setLoading(false);
   };
@@ -453,11 +456,11 @@ function MessengerPage({ user }) {
         .or(`and(sender_id.eq.${user.id},recipient_id.eq.${otherUserId}),and(sender_id.eq.${otherUserId},recipient_id.eq.${user.id})`)
         .order('created_at', { ascending: true });
 
-      if (!error) {
-        setMessages(data || []);
+      if (!error && data) {
+        setMessages(data);
       }
     } catch (err) {
-      console.error(err);
+      console.error('Ошибка загрузки сообщений:', err);
     }
   };
 
@@ -476,19 +479,19 @@ function MessengerPage({ user }) {
         }])
         .select();
 
-      if (!error) {
+      if (!error && data) {
         setMessages([...messages, data[0]]);
         setNewMessage('');
       }
     } catch (err) {
-      console.error(err);
+      console.error('Ошибка отправки сообщения:', err);
     }
   };
 
   return (
     <div className="messenger-container">
       <div className="chats-sidebar">
-        <h3>Чаты</h3>
+        <h3>💬 Чаты</h3>
         <div className="users-list">
           {users.map(u => (
             <div
@@ -557,7 +560,6 @@ function AdminPanel({ user }) {
     try {
       const sb = await initSupabase();
 
-      // Загрузить статистику
       const [usersRes, messagesRes, postsRes, keysRes] = await Promise.all([
         sb.from('users').select('id'),
         sb.from('messages').select('id'),
@@ -573,13 +575,15 @@ function AdminPanel({ user }) {
 
       setEmailKeys(keysRes.data || []);
     } catch (err) {
-      console.error(err);
+      console.error('Ошибка загрузки админ данных:', err);
     }
     setLoading(false);
   };
 
   const handleAddKey = async (e) => {
     e.preventDefault();
+    if (!newKey.name || !newKey.value) return;
+    
     try {
       const sb = await initSupabase();
       const { data, error } = await sb
@@ -592,12 +596,12 @@ function AdminPanel({ user }) {
         }])
         .select();
 
-      if (!error) {
+      if (!error && data) {
         setEmailKeys([...emailKeys, data[0]]);
         setNewKey({ name: '', value: '', type: 'smtp' });
       }
     } catch (err) {
-      console.error(err);
+      console.error('Ошибка добавления ключа:', err);
     }
   };
 
@@ -613,7 +617,7 @@ function AdminPanel({ user }) {
         setEmailKeys(emailKeys.filter(k => k.id !== keyId));
       }
     } catch (err) {
-      console.error(err);
+      console.error('Ошибка удаления ключа:', err);
     }
   };
 
