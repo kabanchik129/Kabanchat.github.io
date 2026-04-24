@@ -1,226 +1,1419 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <!-- Базовые метатеги -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    
-    <!-- SEO метатеги -->
-    <title>🐗 KabanChat - Мессенджер нового поколения | Чаты, Посты, Сообщения</title>
-    <meta name="description" content="KabanChat - современный социальный мессенджер с поддержкой чатов, новостной ленты и сообщений. Как Telegram, Instagram и ВК в одном приложении. Безопасно, быстро, красиво!" />
-    <meta name="keywords" content="мессенджер, чат, социальная сеть, telegram, instagram, вк, переписка, сообщения, лента, постинг" />
-    <meta name="author" content="KabanChat Team" />
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-    <meta name="language" content="Russian" />
-    <meta name="revisit-after" content="7 days" />
-    <meta name="copyright" content="© 2024 KabanChat. All rights reserved." />
-    
-    <!-- Open Graph (Facebook, VK) -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://kabanChat.app/" />
-    <meta property="og:title" content="🐗 KabanChat - Мессенджер нового поколения" />
-    <meta property="og:description" content="Социальный мессенджер с чатами, лентой постов и сообщениями. Красивый, быстрый и безопасный." />
-    <meta property="og:image" content="https://kabanChat.app/og-image.png" />
-    <meta property="og:locale" content="ru_RU" />
-    <meta property="og:site_name" content="KabanChat" />
-    
-    <!-- Twitter / X -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://kabanChat.app/" />
-    <meta name="twitter:title" content="🐗 KabanChat - Мессенджер нового поколения" />
-    <meta name="twitter:description" content="Социальный мессенджер с чатами, лентой постов и сообщениями. Красивый, быстрый и безопасный." />
-    <meta name="twitter:image" content="https://kabanChat.app/og-image.png" />
-    <meta name="twitter:creator" content="@kabanChat" />
-    
-    <!-- Favicon и иконки приложения -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    
-    <!-- Тема цвета -->
-    <meta name="theme-color" content="#0f172a" />
-    <meta name="color-scheme" content="dark light" />
-    
-    <!-- Поддержка мобильных приложений -->
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="KabanChat" />
-    
-    <!-- Безопасность (только правильные meta теги) -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
-    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
-    
-    <!-- Предварительная загрузка ресурсов -->
-    <link rel="preconnect" href="https://peymwntazavsptycyxtp.supabase.co" />
-    <link rel="dns-prefetch" href="https://peymwntazavsptycyxtp.supabase.co" />
-    
-    <!-- Структурированные данные (JSON-LD) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "KabanChat",
-      "description": "Социальный мессенджер нового поколения с поддержкой чатов, ленты постов и сообщений",
-      "url": "https://kabanChat.app/",
-      "applicationCategory": "CommunicationApplication",
-      "operatingSystem": "Web Browser",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "image": "https://kabanChat.app/og-image.png",
-      "author": {
-        "@type": "Organization",
-        "name": "KabanChat",
-        "url": "https://kabanChat.app/"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.8",
-        "ratingCount": "1024",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
-      "softwareRequirements": "Web Browser with JavaScript support",
-      "browserRequirements": "Requires JavaScript"
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🐗 KabanChat - Мессенджер нового поколення</title>
+  <meta name="description" content="KabanChat - сучасний соціальний месенджер з підтримкою чатів, новинної стрічки та повідомлень." />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="preconnect" href="https://peymwntazavsptycyxtp.supabase.co" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --secondary: #8b5cf6;
+      --accent: #ec4899;
+      --success: #10b981;
+      --error: #ef4444;
+      --warning: #f59e0b;
+
+      --bg: #0a0f1e;
+      --surface: #111827;
+      --surface-2: #1a2235;
+      --surface-3: #243044;
+      --text: #f1f5f9;
+      --text-2: #94a3b8;
+      --text-3: #64748b;
+      --border: #1e2d45;
+      --border-2: #2a3a52;
     }
-    </script>
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://kabanChat.app/" />
-    
-    <!-- Стили для предотвращения FOUC (Flash of Unstyled Content) -->
-    <style>
-      html {
-        background: #0f172a;
-        color: #f1f5f9;
-      }
-      
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-          'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-          sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        background-color: #0f172a;
-        color: #f1f5f9;
-      }
-      
-      #root {
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
-      
-      /* Простой лоадер пока загружается React */
-      .app-loading {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        background: #0f172a;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      }
-      
-      .app-loading-content {
-        text-align: center;
-        animation: fadeIn 0.5s ease-in;
-      }
-      
-      .app-loading-logo {
-        font-size: 3rem;
-        margin-bottom: 1rem;
-        animation: bounce 2s ease-in-out infinite;
-      }
-      
-      .app-loading-text {
-        color: #cbd5e1;
-        font-size: 1.1rem;
-        margin-bottom: 2rem;
-      }
-      
-      .app-loading-spinner {
-        width: 40px;
-        height: 40px;
-        margin: 0 auto;
-        border: 4px solid rgba(99, 102, 241, 0.1);
-        border-radius: 50%;
-        border-top-color: #6366f1;
-        animation: spin 1s linear infinite;
-      }
-      
-      @keyframes spin {
-        to { transform: rotate(360deg); }
-      }
-      
-      @keyframes bounce {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
-      }
-      
-      @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-      }
-      
-      /* Поддержка высокого контраста */
-      @media (prefers-contrast: more) {
-        .app-loading-spinner {
-          border-color: rgba(0, 0, 0, 0.2);
-          border-top-color: #000;
-        }
-      }
-      
-      /* Поддержка редуцированной анимации */
-      @media (prefers-reduced-motion: reduce) {
-        .app-loading-logo,
-        .app-loading-spinner {
-          animation: none;
-        }
-      }
-    </style>
-    
-    <!-- No-JS fallback -->
-    <noscript>
-      <style>
-        #root::before {
-          content: "KabanChat требует включенный JavaScript. Пожалуйста, включите JavaScript в настройках браузера.";
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          min-height: 100vh;
-          background: #0f172a;
-          color: #f1f5f9;
-          font-family: system-ui;
-          text-align: center;
-          padding: 2rem;
-          font-size: 1.1rem;
-        }
-      </style>
-    </noscript>
-  </head>
-  <body>
-    <!-- Главный корневой элемент для React приложения -->
-    <div id="root">
-      <!-- Показываем лоадер пока загружается React -->
-      <div class="app-loading">
-        <div class="app-loading-content">
-          <div class="app-loading-logo">🐗</div>
-          <div class="app-loading-text">KabanChat</div>
-          <div class="app-loading-spinner"></div>
+
+    body {
+      font-family: 'Onest', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    button { font-family: inherit; cursor: pointer; }
+    input, textarea, select { font-family: inherit; }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+    /* ===== LOADER ===== */
+    #loader {
+      display: flex; justify-content: center; align-items: center;
+      height: 100vh; background: var(--bg);
+      flex-direction: column; gap: 1rem;
+    }
+    .loader-emoji { font-size: 4rem; animation: float 2s ease-in-out infinite; }
+    .loader-title {
+      font-size: 2rem; font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .loader-sub { color: var(--text-2); font-size: 0.9rem; }
+    .spinner {
+      width: 40px; height: 40px;
+      border: 3px solid rgba(99,102,241,0.15);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-top: 0.5rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== APP LAYOUT ===== */
+    #app { display: none; flex-direction: column; height: 100vh; }
+
+    /* ===== NAVBAR ===== */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 1.5rem; height: 60px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+    .nav-left { display: flex; align-items: center; gap: 2rem; }
+    .logo {
+      font-size: 1.25rem; font-weight: 800; white-space: nowrap;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+    .nav-links { display: flex; gap: 0.25rem; }
+    .nav-btn {
+      background: transparent; border: none;
+      color: var(--text-2); padding: 0.5rem 0.9rem;
+      border-radius: 8px; font-size: 0.88rem; font-weight: 500;
+      transition: all 0.2s; position: relative;
+    }
+    .nav-btn:hover { color: var(--text); background: var(--surface-2); }
+    .nav-btn.active { color: var(--primary); background: rgba(99,102,241,0.1); }
+    .nav-right { display: flex; align-items: center; gap: 0.75rem; }
+    .nav-user {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.4rem 0.8rem;
+      background: var(--surface-2); border-radius: 8px;
+      font-size: 0.85rem; color: var(--text-2);
+    }
+    .nav-user span { color: var(--text); font-weight: 600; }
+    .btn-sm {
+      padding: 0.45rem 1rem; border-radius: 8px;
+      font-size: 0.85rem; font-weight: 600; border: none;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(99,102,241,0.3); }
+    .btn-danger { background: rgba(239,68,68,0.1); color: var(--error); }
+    .btn-danger:hover { background: var(--error); color: white; }
+
+    /* ===== MAIN CONTENT ===== */
+    main { flex: 1; overflow-y: auto; background: var(--bg); }
+
+    /* ===== PAGE BASE ===== */
+    .page { display: none; animation: fadeUp 0.3s ease; }
+    .page.active { display: block; }
+
+    /* ===== AUTH PAGE ===== */
+    #page-auth {
+      display: none; justify-content: center; align-items: center;
+      min-height: 100%; padding: 2rem;
+      background: radial-gradient(ellipse at 50% 0%, rgba(99,102,241,0.08), transparent 60%);
+    }
+    #page-auth.active { display: flex; }
+    .auth-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 2.5rem;
+      width: 100%; max-width: 420px;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+      animation: fadeUp 0.4s ease;
+    }
+    .auth-logo {
+      text-align: center; font-size: 2.5rem; margin-bottom: 0.5rem;
+    }
+    .auth-title {
+      text-align: center; font-size: 1.6rem; font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 0.25rem;
+    }
+    .auth-sub { text-align: center; color: var(--text-2); margin-bottom: 2rem; font-size: 0.9rem; }
+    .auth-tabs {
+      display: flex; border-bottom: 1px solid var(--border); margin-bottom: 1.5rem;
+    }
+    .auth-tab {
+      flex: 1; background: transparent; border: none;
+      color: var(--text-2); padding: 0.75rem;
+      font-size: 0.9rem; font-weight: 500;
+      border-bottom: 2px solid transparent; transition: all 0.2s;
+    }
+    .auth-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+    .auth-form { display: flex; flex-direction: column; gap: 0.85rem; }
+    .input-field {
+      background: var(--surface-2); border: 1px solid var(--border);
+      color: var(--text); padding: 0.75rem 1rem;
+      border-radius: 10px; font-size: 0.9rem; width: 100%;
+      transition: all 0.2s; outline: none;
+    }
+    .input-field:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(99,102,241,0.1); }
+    .input-field::placeholder { color: var(--text-3); }
+    .btn-full {
+      width: 100%; padding: 0.8rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white; border: none; border-radius: 10px;
+      font-size: 0.95rem; font-weight: 700;
+      transition: all 0.2s; margin-top: 0.25rem;
+    }
+    .btn-full:hover:not(:disabled) { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 6px 16px rgba(99,102,241,0.3); }
+    .btn-full:disabled { opacity: 0.5; cursor: not-allowed; }
+    .error-msg {
+      background: rgba(239,68,68,0.1); color: #fca5a5;
+      padding: 0.7rem 1rem; border-radius: 8px;
+      border-left: 3px solid var(--error); font-size: 0.85rem;
+    }
+    .auth-hint {
+      text-align: center; margin-top: 1.5rem; padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-2); font-size: 0.82rem;
+    }
+    .auth-hint p { margin: 0.3rem 0; }
+    .auth-hint strong { color: var(--primary); }
+
+    /* ===== FEED PAGE ===== */
+    #page-feed { padding: 2rem; max-width: 1300px; margin: 0 auto; }
+    .feed-grid {
+      display: grid; grid-template-columns: 240px 1fr 280px; gap: 2rem;
+    }
+    .feed-sidebar { position: sticky; top: 80px; height: fit-content; }
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.5rem;
+    }
+    .profile-card { text-align: center; }
+    .profile-avatar {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; margin: 0 auto 1rem;
+    }
+    .profile-name { font-weight: 700; font-size: 1rem; margin-bottom: 0.2rem; }
+    .profile-handle { color: var(--text-2); font-size: 0.82rem; margin-bottom: 1rem; }
+    .profile-stats { display: flex; border-top: 1px solid var(--border); padding-top: 1rem; }
+    .pstat { flex: 1; text-align: center; }
+    .pstat-num { display: block; font-size: 1.4rem; font-weight: 700; color: var(--primary); }
+    .pstat-label { font-size: 0.75rem; color: var(--text-2); }
+
+    /* Post Form */
+    .post-form-card { margin-bottom: 0; }
+    .post-form-inner { display: flex; gap: 1rem; align-items: flex-start; }
+    .mini-avatar {
+      width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .post-textarea {
+      flex: 1; background: var(--surface-2); border: 1px solid var(--border);
+      color: var(--text); padding: 0.75rem 1rem; border-radius: 12px;
+      font-size: 0.92rem; resize: none; outline: none;
+      transition: all 0.2s; min-height: 70px;
+      font-family: inherit;
+    }
+    .post-textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(99,102,241,0.1); }
+    .post-textarea::placeholder { color: var(--text-3); }
+    .post-form-footer { display: flex; justify-content: flex-end; margin-top: 0.75rem; }
+    .btn-post {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white; border: none; padding: 0.55rem 1.4rem;
+      border-radius: 8px; font-weight: 600; font-size: 0.88rem;
+      transition: all 0.2s;
+    }
+    .btn-post:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    /* Posts */
+    .posts-list { display: flex; flex-direction: column; gap: 1.25rem; }
+    .post-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.4rem;
+      transition: all 0.2s; animation: slideIn 0.3s ease;
+    }
+    .post-card:hover { border-color: var(--border-2); box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+    .post-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+    .post-author { display: flex; align-items: center; gap: 0.75rem; }
+    .post-author-name { font-weight: 600; font-size: 0.92rem; }
+    .post-author-handle { color: var(--text-2); font-size: 0.8rem; }
+    .post-time { color: var(--text-3); font-size: 0.78rem; }
+    .post-body { line-height: 1.65; color: var(--text); margin-bottom: 1.1rem; font-size: 0.93rem; }
+    .post-actions { display: flex; gap: 0.5rem; border-top: 1px solid var(--border); padding-top: 1rem; }
+    .action-btn {
+      flex: 1; background: transparent; border: 1px solid var(--border);
+      color: var(--text-2); padding: 0.45rem 0.5rem;
+      border-radius: 8px; font-size: 0.82rem; font-weight: 500;
+      transition: all 0.2s;
+    }
+    .action-btn:hover { color: var(--primary); border-color: var(--primary); background: rgba(99,102,241,0.05); }
+    .action-btn.liked { color: #ef4444; border-color: #ef4444; background: rgba(239,68,68,0.05); }
+
+    /* Recommendations */
+    .reco-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 1rem; }
+    .reco-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.8rem 0; border-bottom: 1px solid var(--border);
+    }
+    .reco-item:last-child { border-bottom: none; }
+    .reco-name { font-weight: 600; font-size: 0.85rem; margin-bottom: 0.15rem; }
+    .reco-handle { color: var(--text-2); font-size: 0.78rem; }
+    .btn-follow {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white; border: none; padding: 0.35rem 0.9rem;
+      border-radius: 6px; font-size: 0.78rem; font-weight: 600;
+      transition: all 0.2s; white-space: nowrap;
+    }
+    .btn-follow:hover { opacity: 0.85; }
+    .btn-follow.following { background: var(--surface-3); color: var(--text-2); }
+
+    /* Section title */
+    .section-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 1.25rem; }
+
+    /* ===== MESSENGER PAGE ===== */
+    #page-messages { height: calc(100vh - 60px); display: none; }
+    #page-messages.active { display: flex; }
+    .msg-layout { display: grid; grid-template-columns: 300px 1fr; height: 100%; }
+    .msg-sidebar {
+      background: var(--surface); border-right: 1px solid var(--border);
+      display: flex; flex-direction: column;
+    }
+    .msg-sidebar-head {
+      padding: 1.25rem 1.25rem 1rem;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .msg-sidebar-title { font-weight: 700; font-size: 1rem; }
+    .btn-new-chat {
+      background: rgba(99,102,241,0.1); border: none; color: var(--primary);
+      width: 30px; height: 30px; border-radius: 8px;
+      font-size: 1.1rem; display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+    }
+    .btn-new-chat:hover { background: rgba(99,102,241,0.2); }
+    .msg-search { padding: 0.75rem 1.25rem; }
+    .msg-search input {
+      width: 100%; background: var(--surface-2); border: 1px solid var(--border);
+      color: var(--text); padding: 0.55rem 0.9rem; border-radius: 8px;
+      font-size: 0.85rem; outline: none; transition: all 0.2s;
+    }
+    .msg-search input:focus { border-color: var(--primary); }
+    .contacts-list { flex: 1; overflow-y: auto; padding: 0.5rem; }
+    .contact-item {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.85rem; border-radius: 10px; cursor: pointer;
+      transition: all 0.2s; position: relative;
+    }
+    .contact-item:hover { background: var(--surface-2); }
+    .contact-item.active { background: rgba(99,102,241,0.1); }
+    .contact-avatar {
+      width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .contact-name { font-weight: 600; font-size: 0.88rem; margin-bottom: 0.2rem; }
+    .contact-last { color: var(--text-2); font-size: 0.78rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 140px; }
+    .contact-time { color: var(--text-3); font-size: 0.72rem; position: absolute; right: 0.85rem; top: 0.85rem; }
+    .unread-badge {
+      background: var(--primary); color: white;
+      font-size: 0.7rem; font-weight: 700;
+      padding: 0.15rem 0.45rem; border-radius: 10px;
+      position: absolute; right: 0.85rem; bottom: 0.85rem;
+    }
+
+    /* Chat window */
+    .chat-win { display: flex; flex-direction: column; background: var(--bg); }
+    .chat-head {
+      padding: 1rem 1.5rem; border-bottom: 1px solid var(--border);
+      background: var(--surface); display: flex; align-items: center; gap: 1rem;
+    }
+    .chat-head-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex; align-items: center; justify-content: center; font-size: 1rem;
+    }
+    .chat-head-name { font-weight: 700; font-size: 0.95rem; }
+    .chat-head-status { color: var(--success); font-size: 0.78rem; }
+    .messages-area {
+      flex: 1; overflow-y: auto; padding: 1.5rem;
+      display: flex; flex-direction: column; gap: 0.75rem;
+    }
+    .msg-bubble {
+      max-width: 68%; padding: 0.7rem 1rem;
+      border-radius: 14px; word-break: break-word; animation: slideIn 0.2s ease;
+    }
+    .msg-bubble.sent {
+      align-self: flex-end;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white; border-radius: 14px 14px 2px 14px;
+    }
+    .msg-bubble.recv {
+      align-self: flex-start;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px 14px 14px 2px;
+    }
+    .msg-bubble p { font-size: 0.9rem; line-height: 1.5; margin: 0; }
+    .msg-time { font-size: 0.7rem; opacity: 0.6; margin-top: 0.3rem; }
+    .msg-input-area {
+      padding: 1rem 1.5rem; border-top: 1px solid var(--border);
+      background: var(--surface); display: flex; gap: 0.75rem; align-items: flex-end;
+    }
+    .msg-input {
+      flex: 1; background: var(--surface-2); border: 1px solid var(--border);
+      color: var(--text); padding: 0.7rem 1rem; border-radius: 12px;
+      font-size: 0.9rem; outline: none; resize: none;
+      max-height: 120px; min-height: 44px; font-family: inherit;
+      transition: all 0.2s;
+    }
+    .msg-input:focus { border-color: var(--primary); }
+    .btn-send {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white; border: none; width: 44px; height: 44px;
+      border-radius: 12px; font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s; flex-shrink: 0;
+    }
+    .btn-send:hover { opacity: 0.9; transform: scale(1.05); }
+    .empty-chat {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      height: 100%; color: var(--text-2); gap: 1rem;
+    }
+    .empty-chat-icon { font-size: 4rem; }
+    .empty-chat p { font-size: 1rem; }
+
+    /* ===== EXPLORE PAGE ===== */
+    #page-explore { padding: 2rem; max-width: 900px; margin: 0 auto; }
+    .explore-head { margin-bottom: 2rem; }
+    .explore-head h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 1rem; }
+    .search-big {
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); padding: 0.9rem 1.2rem; border-radius: 12px;
+      font-size: 1rem; width: 100%; outline: none; transition: all 0.2s;
+    }
+    .search-big:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(99,102,241,0.1); }
+    .users-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.25rem;
+    }
+    .user-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.5rem; text-align: center;
+      transition: all 0.25s; animation: fadeUp 0.3s ease;
+    }
+    .user-card:hover { border-color: var(--primary); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(99,102,241,0.15); }
+    .user-card-avatar {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; margin: 0 auto 1rem;
+    }
+    .user-card-name { font-weight: 700; margin-bottom: 0.3rem; }
+    .user-card-handle { color: var(--text-2); font-size: 0.82rem; margin-bottom: 1rem; }
+
+    /* ===== ADMIN PAGE ===== */
+    #page-admin { padding: 2rem; max-width: 1100px; margin: 0 auto; }
+    .admin-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 2rem; }
+    .admin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin-bottom: 2rem; }
+    .admin-stat {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.5rem;
+      background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(139,92,246,0.04));
+    }
+    .admin-stat-label { color: var(--text-2); font-size: 0.85rem; margin-bottom: 0.5rem; }
+    .admin-stat-num {
+      font-size: 2.5rem; font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .admin-section {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.75rem; margin-bottom: 1.5rem;
+    }
+    .admin-section-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 1.25rem; }
+    .key-form { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+    .key-form .input-field { flex: 1; min-width: 140px; }
+    .key-form select.input-field { max-width: 140px; }
+    .key-item {
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--surface-2); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1rem; margin-bottom: 0.6rem;
+    }
+    .key-name { font-weight: 600; font-size: 0.9rem; }
+    .key-type { color: var(--text-2); font-size: 0.78rem; margin-top: 0.2rem; font-family: 'JetBrains Mono', monospace; }
+    .btn-del {
+      background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2);
+      color: var(--error); padding: 0.4rem 0.75rem; border-radius: 6px;
+      font-size: 0.82rem; font-weight: 600; transition: all 0.2s;
+    }
+    .btn-del:hover { background: var(--error); color: white; border-color: var(--error); }
+    .users-table { width: 100%; border-collapse: collapse; }
+    .users-table th {
+      text-align: left; padding: 0.75rem 1rem; color: var(--text-2);
+      font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border);
+    }
+    .users-table td {
+      padding: 0.85rem 1rem; border-bottom: 1px solid var(--border);
+      font-size: 0.88rem;
+    }
+    .users-table tr:last-child td { border-bottom: none; }
+    .users-table tr:hover td { background: var(--surface-2); }
+    .badge {
+      padding: 0.25rem 0.65rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+    }
+    .badge-admin { background: rgba(99,102,241,0.1); color: var(--primary); }
+    .badge-user { background: rgba(16,185,129,0.1); color: var(--success); }
+
+    /* Chart */
+    .chart-bars { display: flex; align-items: flex-end; gap: 0.5rem; height: 140px; }
+    .chart-bar {
+      flex: 1; border-radius: 4px 4px 0 0; transition: all 0.3s;
+      background: linear-gradient(180deg, var(--primary), var(--secondary));
+      cursor: pointer; min-width: 20px;
+    }
+    .chart-bar:hover { filter: brightness(1.15); }
+    .chart-labels { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
+    .chart-label { flex: 1; text-align: center; font-size: 0.7rem; color: var(--text-3); min-width: 20px; }
+
+    /* Period selector */
+    .period-btns { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .period-btn {
+      background: var(--surface-2); border: 1px solid var(--border);
+      color: var(--text-2); padding: 0.45rem 1rem; border-radius: 8px;
+      font-size: 0.85rem; font-weight: 500; transition: all 0.2s;
+    }
+    .period-btn.active { background: var(--primary); border-color: var(--primary); color: white; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .feed-grid { grid-template-columns: 1fr; }
+      .feed-sidebar { display: none; }
+      .feed-sidebar:last-child { display: none; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 1rem; }
+      .nav-left { gap: 0.75rem; }
+      .nav-user { display: none; }
+      #page-feed { padding: 1rem; }
+      .msg-layout { grid-template-columns: 1fr; }
+      .msg-sidebar { display: none; }
+      #page-explore { padding: 1rem; }
+      #page-admin { padding: 1rem; }
+    }
+
+    /* ===== TOAST ===== */
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); padding: 0.9rem 1.4rem;
+      border-radius: 12px; font-size: 0.88rem; font-weight: 500;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      z-index: 9999; animation: slideIn 0.3s ease;
+      border-left: 3px solid var(--primary);
+      max-width: 320px;
+    }
+    .toast.error { border-left-color: var(--error); }
+    .toast.success { border-left-color: var(--success); }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center; padding: 3rem 1rem;
+      color: var(--text-2); font-size: 1rem;
+    }
+    .empty-state-icon { font-size: 3rem; margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-emoji">🐗</div>
+  <div class="loader-title">KabanChat</div>
+  <div class="loader-sub">Завантаження...</div>
+  <div class="spinner"></div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <!-- NAVBAR -->
+  <nav>
+    <div class="nav-left">
+      <div class="logo">🐗 KabanChat</div>
+      <div class="nav-links" id="nav-links">
+        <button class="nav-btn active" data-page="feed">📰 Стрічка</button>
+        <button class="nav-btn" data-page="messages">💬 Повідомлення</button>
+        <button class="nav-btn" data-page="explore">🔍 Пошук</button>
+      </div>
+      <div class="nav-links" id="nav-admin-links" style="display:none">
+        <button class="nav-btn active" data-page="admin">⚙️ Адмін</button>
+      </div>
+    </div>
+    <div class="nav-right">
+      <div class="nav-user">👤 <span id="nav-username">Гість</span></div>
+      <button class="btn-sm btn-primary" id="btn-auth" onclick="showAuth()">Вхід</button>
+      <button class="btn-sm btn-danger" id="btn-logout" style="display:none" onclick="logout()">Вийти</button>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- AUTH PAGE -->
+    <div id="page-auth" class="active">
+      <div class="auth-card">
+        <div class="auth-logo">🐗</div>
+        <div class="auth-title">KabanChat</div>
+        <div class="auth-sub">Месенджер нового покоління</div>
+        <div class="auth-tabs">
+          <button class="auth-tab active" onclick="switchAuthTab('login', this)">Вхід</button>
+          <button class="auth-tab" onclick="switchAuthTab('register', this)">Реєстрація</button>
+        </div>
+        <form class="auth-form" id="auth-form" onsubmit="handleAuth(event)">
+          <div id="reg-fields" style="display:none; display:flex; flex-direction:column; gap:0.85rem; display:none">
+            <input class="input-field" type="email" id="auth-email" placeholder="Email" />
+            <input class="input-field" type="text" id="auth-fullname" placeholder="Повне ім'я" />
+          </div>
+          <input class="input-field" type="text" id="auth-username" placeholder="Логін" required />
+          <input class="input-field" type="password" id="auth-password" placeholder="Пароль" required />
+          <input class="input-field" type="password" id="auth-confirm" placeholder="Повторіть пароль" style="display:none" />
+          <div class="error-msg" id="auth-error" style="display:none"></div>
+          <button class="btn-full" type="submit" id="auth-submit">Увійти</button>
+        </form>
+        <div class="auth-hint">
+          <p>📝 Демо: <strong>kaban / 123</strong></p>
+          <p>✨ Або переглядайте стрічку без реєстрації</p>
         </div>
       </div>
     </div>
-    
-    <!-- React приложение загружается отсюда -->
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+    <!-- FEED PAGE -->
+    <div id="page-feed" class="page">
+      <div class="feed-grid">
+        <!-- Left sidebar -->
+        <div class="feed-sidebar">
+          <div class="card profile-card">
+            <div class="profile-avatar" id="profile-avatar-big">👤</div>
+            <div class="profile-name" id="sidebar-name">Демо</div>
+            <div class="profile-handle" id="sidebar-handle">@demo</div>
+            <div class="profile-stats">
+              <div class="pstat">
+                <span class="pstat-num" id="stat-posts">0</span>
+                <span class="pstat-label">Пости</span>
+              </div>
+              <div class="pstat">
+                <span class="pstat-num">156</span>
+                <span class="pstat-label">Підписники</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center feed -->
+        <div>
+          <div class="card post-form-card" style="margin-bottom: 1.5rem;">
+            <form onsubmit="createPost(event)">
+              <div class="post-form-inner">
+                <div class="mini-avatar">👤</div>
+                <textarea class="post-textarea" id="post-text" placeholder="Що нового? 🐗" rows="2"></textarea>
+              </div>
+              <div class="post-form-footer">
+                <button class="btn-post" type="submit">Опублікувати</button>
+              </div>
+            </form>
+          </div>
+          <div class="posts-list" id="posts-list">
+            <div class="empty-state"><div class="empty-state-icon">🐗</div><p>Завантаження стрічки...</p></div>
+          </div>
+        </div>
+
+        <!-- Right sidebar -->
+        <div class="feed-sidebar">
+          <div class="card">
+            <div class="reco-title">👥 Рекомендації</div>
+            <div id="reco-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MESSAGES PAGE -->
+    <div id="page-messages" style="display:none">
+      <div class="msg-layout">
+        <div class="msg-sidebar">
+          <div class="msg-sidebar-head">
+            <div class="msg-sidebar-title">💬 Повідомлення</div>
+            <button class="btn-new-chat" title="Новий чат">+</button>
+          </div>
+          <div class="msg-search">
+            <input type="text" id="contact-search" placeholder="Пошук..." oninput="filterContacts(this.value)" />
+          </div>
+          <div class="contacts-list" id="contacts-list"></div>
+        </div>
+        <div class="chat-win" id="chat-win">
+          <div class="empty-chat">
+            <div class="empty-chat-icon">💬</div>
+            <p>Оберіть контакт для чату</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXPLORE PAGE -->
+    <div id="page-explore" class="page" style="display:none">
+      <div class="explore-head">
+        <h2>🔍 Пошук користувачів</h2>
+        <input class="search-big" type="text" id="explore-search" placeholder="Пошук за іменем або логіном..." oninput="filterUsers(this.value)" />
+      </div>
+      <div class="users-grid" id="users-grid"></div>
+    </div>
+
+    <!-- ADMIN PAGE -->
+    <div id="page-admin" class="page" style="display:none">
+      <div class="admin-title">⚙️ Адмін Панель</div>
+
+      <!-- Stats -->
+      <div class="admin-grid">
+        <div class="admin-stat">
+          <div class="admin-stat-label">👥 Користувачів</div>
+          <div class="admin-stat-num" id="admin-users-count">3</div>
+        </div>
+        <div class="admin-stat">
+          <div class="admin-stat-label">💬 Повідомлень</div>
+          <div class="admin-stat-num" id="admin-msgs-count">15</div>
+        </div>
+        <div class="admin-stat">
+          <div class="admin-stat-label">📝 Постів</div>
+          <div class="admin-stat-num" id="admin-posts-count">8</div>
+        </div>
+        <div class="admin-stat">
+          <div class="admin-stat-label">🟢 Онлайн</div>
+          <div class="admin-stat-num">12</div>
+        </div>
+      </div>
+
+      <!-- Chart -->
+      <div class="admin-section">
+        <div class="admin-section-title">📈 Активність (тижень)</div>
+        <div class="period-btns">
+          <button class="period-btn active" onclick="setPeriod(this,'day')">День</button>
+          <button class="period-btn" onclick="setPeriod(this,'week')">Тиждень</button>
+          <button class="period-btn" onclick="setPeriod(this,'month')">Місяць</button>
+        </div>
+        <div class="chart-bars" id="chart-bars"></div>
+        <div class="chart-labels" id="chart-labels"></div>
+      </div>
+
+      <!-- Email Keys -->
+      <div class="admin-section">
+        <div class="admin-section-title">🔑 Управління ключами пошти</div>
+        <form class="key-form" onsubmit="addKey(event)">
+          <input class="input-field" type="text" id="key-name" placeholder="Назва ключа" required />
+          <select class="input-field" id="key-type" style="max-width:130px">
+            <option value="smtp">SMTP</option>
+            <option value="sendgrid">SendGrid</option>
+            <option value="mailgun">Mailgun</option>
+          </select>
+          <input class="input-field" type="password" id="key-value" placeholder="API ключ" required />
+          <button class="btn-sm btn-primary" type="submit">Додати</button>
+        </form>
+        <div id="keys-list"></div>
+      </div>
+
+      <!-- Users table -->
+      <div class="admin-section">
+        <div class="admin-section-title">👤 Користувачі</div>
+        <table class="users-table">
+          <thead>
+            <tr>
+              <th>Ім'я</th>
+              <th>Логін</th>
+              <th>Email</th>
+              <th>Роль</th>
+              <th>Дата</th>
+            </tr>
+          </thead>
+          <tbody id="users-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+// ============= CONFIG =============
+const SUPABASE_URL = 'https://peymwntazavsptycyxtp.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBleW13bnRhemF2c3B0eWN5eHRwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwMjI4MTIsImV4cCI6MjA5MjU5ODgxMn0.yv3B3wPCllnzoam0gMqEicVJrSFSjP4oRNiL8nrpHeY';
+
+let sb = null;
+let currentUser = null;
+let isAdmin = false;
+let currentPage = 'feed';
+let selectedContact = null;
+let allUsers = [];
+let allPosts = [];
+let emailKeys = [{ id: 1, key_name: 'SendGrid API', service_type: 'sendgrid', key_value: '***' }];
+let likedPosts = new Set();
+let followingUsers = new Set();
+let authMode = 'login';
+
+// ============= DEMO DATA =============
+const DEMO_USER = { id: 'demo-user', username: 'demo_user', full_name: 'Демо Користувач', email: 'demo@test.com' };
+
+const DEMO_USERS_LIST = [
+  { id: 'u1', full_name: 'Іван Петров', username: 'ivan_petrov', email: 'ivan@test.com', created_at: '2024-01-15' },
+  { id: 'u2', full_name: 'Марія Сидорова', username: 'maria_sidor', email: 'maria@test.com', created_at: '2024-02-10' },
+  { id: 'u3', full_name: 'Сергій Смирнов', username: 'sergey_smir', email: 'sergey@test.com', created_at: '2024-03-05' },
+  { id: 'u4', full_name: 'Олена Ковальова', username: 'olena_k', email: 'olena@test.com', created_at: '2024-03-20' },
+  { id: 'u5', full_name: 'Андрій Мороз', username: 'andrii_m', email: 'andrii@test.com', created_at: '2024-04-01' },
+];
+
+const DEMO_POSTS_LIST = [
+  { id: 'p1', user_id: 'u1', content: '🐗 Привіт! Це демо версія KabanChat — месенджер нового покоління!', users: { full_name: 'Іван Петров', username: 'ivan_petrov' }, created_at: new Date().toISOString(), likes_count: 42 },
+  { id: 'p2', user_id: 'u2', content: 'Мій перший пост у стрічці 📝 Дуже зручний інтерфейс!', users: { full_name: 'Марія Сидорова', username: 'maria_sidor' }, created_at: new Date(Date.now() - 3600000).toISOString(), likes_count: 15 },
+  { id: 'p3', user_id: 'u3', content: 'Як вам новий дизайн? Мені дуже подобається темна тема 🌙', users: { full_name: 'Сергій Смирнов', username: 'sergey_smir' }, created_at: new Date(Date.now() - 7200000).toISOString(), likes_count: 28 },
+  { id: 'p4', user_id: 'u4', content: 'Тестую повідомлення та лайки. Все працює чудово! ✨', users: { full_name: 'Олена Ковальова', username: 'olena_k' }, created_at: new Date(Date.now() - 10800000).toISOString(), likes_count: 7 },
+];
+
+const DEMO_MESSAGES = {
+  'u1': [
+    { id: 'm1', sender_id: 'u1', content: 'Привіт! 👋', created_at: new Date(Date.now() - 7200000).toISOString() },
+    { id: 'm2', sender_id: 'demo-user', content: 'Привіт! Як справи?', created_at: new Date(Date.now() - 3600000).toISOString() },
+    { id: 'm3', sender_id: 'u1', content: 'Все добре! А у тебе? Як тобі KabanChat?', created_at: new Date(Date.now() - 1800000).toISOString() },
+  ],
+  'u2': [
+    { id: 'm4', sender_id: 'u2', content: 'Гарний дизайн!', created_at: new Date(Date.now() - 3600000).toISOString() },
+  ],
+  'u3': [],
+  'u4': [],
+  'u5': [],
+};
+
+// ============= INIT =============
+async function init() {
+  try {
+    if (typeof supabase !== 'undefined') {
+      sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    }
+  } catch(e) { console.log('Supabase init failed, demo mode'); }
+
+  const stored = localStorage.getItem('kaban_user');
+  if (stored) {
+    currentUser = JSON.parse(stored);
+    isAdmin = currentUser.username === 'kaban';
+    onLogin();
+  } else {
+    currentUser = DEMO_USER;
+    onLogin();
+  }
+
+  allUsers = [...DEMO_USERS_LIST];
+  allPosts = [...DEMO_POSTS_LIST];
+
+  // Try load from Supabase
+  if (sb) {
+    try {
+      const { data: users } = await sb.from('users').select('*').limit(20);
+      if (users && users.length) {
+        allUsers = [...users, ...DEMO_USERS_LIST.filter(d => !users.find(u => u.id === d.id))];
+      }
+      const { data: posts } = await sb.from('posts').select('*, users(full_name,username)').order('created_at', { ascending: false }).limit(30);
+      if (posts && posts.length) allPosts = posts;
+    } catch(e) { console.log('Using demo data'); }
+  }
+
+  document.getElementById('loader').style.display = 'none';
+  document.getElementById('app').style.display = 'flex';
+
+  renderFeed();
+  renderContacts();
+  renderExplore();
+  renderRecommendations();
+  if (isAdmin) renderAdmin();
+}
+
+// ============= AUTH HELPERS =============
+function onLogin() {
+  isAdmin = currentUser.username === 'kaban';
+  document.getElementById('nav-username').textContent = currentUser.full_name || currentUser.username;
+  document.getElementById('btn-auth').style.display = 'none';
+  document.getElementById('btn-logout').style.display = '';
+  document.getElementById('sidebar-name').textContent = currentUser.full_name;
+  document.getElementById('sidebar-handle').textContent = '@' + currentUser.username;
+
+  if (isAdmin) {
+    document.getElementById('nav-links').style.display = 'none';
+    document.getElementById('nav-admin-links').style.display = '';
+    showPage('admin');
+  } else {
+    document.getElementById('nav-links').style.display = '';
+    document.getElementById('nav-admin-links').style.display = 'none';
+    showPage('feed');
+  }
+}
+
+function showAuth() {
+  document.querySelectorAll('.page, #page-auth, #page-messages').forEach(p => {
+    p.style.display = 'none';
+    p.classList.remove('active');
+  });
+  document.getElementById('page-auth').style.display = 'flex';
+  document.getElementById('page-auth').classList.add('active');
+}
+
+function switchAuthTab(mode, btn) {
+  authMode = mode;
+  document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('reg-fields').style.display = mode === 'register' ? 'flex' : 'none';
+  document.getElementById('reg-fields').style.flexDirection = 'column';
+  document.getElementById('reg-fields').style.gap = '0.85rem';
+  document.getElementById('auth-confirm').style.display = mode === 'register' ? '' : 'none';
+  document.getElementById('auth-submit').textContent = mode === 'login' ? 'Увійти' : 'Зареєструватися';
+  document.getElementById('auth-error').style.display = 'none';
+}
+
+async function handleAuth(e) {
+  e.preventDefault();
+  const errEl = document.getElementById('auth-error');
+  errEl.style.display = 'none';
+  const btn = document.getElementById('auth-submit');
+  btn.disabled = true; btn.textContent = 'Завантаження...';
+
+  const username = document.getElementById('auth-username').value.trim();
+  const password = document.getElementById('auth-password').value;
+
+  try {
+    if (authMode === 'login') {
+      // Admin shortcut
+      if (username === 'kaban' && password === '123') {
+        const adminUser = { id: 'admin-id', username: 'kaban', full_name: 'Адміністратор', email: 'admin@kaban.chat' };
+        localStorage.setItem('kaban_user', JSON.stringify(adminUser));
+        currentUser = adminUser;
+        onLogin();
+        return;
+      }
+      // Demo users shortcut
+      const demoMatch = DEMO_USERS_LIST.find(u => u.username === username);
+      if (demoMatch && password === '123') {
+        localStorage.setItem('kaban_user', JSON.stringify(demoMatch));
+        currentUser = demoMatch;
+        onLogin();
+        return;
+      }
+      // Supabase
+      if (sb) {
+        const { data, error } = await sb.from('users').select('*').eq('username', username).single();
+        if (error || !data) { showError(errEl, 'Користувача не знайдено'); return; }
+        if (data.password_hash !== password) { showError(errEl, 'Невірний пароль'); return; }
+        localStorage.setItem('kaban_user', JSON.stringify(data));
+        currentUser = data;
+        onLogin();
+      } else {
+        showError(errEl, 'Користувача не знайдено. Спробуйте демо: kaban / 123');
+      }
+    } else {
+      const email = document.getElementById('auth-email').value.trim();
+      const fullName = document.getElementById('auth-fullname').value.trim();
+      const confirm = document.getElementById('auth-confirm').value;
+      if (password !== confirm) { showError(errEl, 'Паролі не співпадають'); return; }
+      if (!email || !fullName) { showError(errEl, 'Заповніть всі поля'); return; }
+      if (sb) {
+        const { data, error } = await sb.from('users').insert([{ email, username, full_name: fullName, password_hash: password }]).select();
+        if (error) { showError(errEl, error.message || 'Помилка реєстрації'); return; }
+        const newUser = data[0];
+        localStorage.setItem('kaban_user', JSON.stringify(newUser));
+        currentUser = newUser;
+        allUsers.push(newUser);
+        onLogin();
+      } else {
+        const newUser = { id: 'new-' + Date.now(), email, username, full_name: fullName, created_at: new Date().toISOString() };
+        localStorage.setItem('kaban_user', JSON.stringify(newUser));
+        currentUser = newUser;
+        allUsers.push(newUser);
+        onLogin();
+        toast('Демо реєстрація успішна!', 'success');
+      }
+    }
+  } catch(err) {
+    showError(errEl, err.message || 'Невідома помилка');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = authMode === 'login' ? 'Увійти' : 'Зареєструватися';
+  }
+}
+
+function showError(el, msg) {
+  el.textContent = msg; el.style.display = '';
+  const btn = document.getElementById('auth-submit');
+  btn.disabled = false;
+  btn.textContent = authMode === 'login' ? 'Увійти' : 'Зареєструватися';
+}
+
+function logout() {
+  localStorage.removeItem('kaban_user');
+  currentUser = DEMO_USER;
+  isAdmin = false;
+  document.getElementById('btn-auth').style.display = '';
+  document.getElementById('btn-logout').style.display = 'none';
+  document.getElementById('nav-username').textContent = 'Гість';
+  document.getElementById('nav-links').style.display = '';
+  document.getElementById('nav-admin-links').style.display = 'none';
+  showPage('feed');
+  renderFeed();
+}
+
+// ============= NAVIGATION =============
+function showPage(page) {
+  currentPage = page;
+  // Hide all
+  document.querySelectorAll('.page, #page-auth, #page-messages').forEach(p => {
+    p.style.display = 'none'; p.classList.remove('active');
+  });
+  // Deactivate nav
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+
+  const pageEl = document.getElementById('page-' + page);
+  if (!pageEl) return;
+
+  if (page === 'messages') {
+    pageEl.style.display = 'flex';
+  } else if (page === 'auth') {
+    pageEl.style.display = 'flex';
+  } else {
+    pageEl.style.display = 'block';
+  }
+  pageEl.classList.add('active');
+
+  // Activate nav button
+  document.querySelectorAll('.nav-btn[data-page="' + page + '"]').forEach(b => b.classList.add('active'));
+}
+
+// Nav button clicks
+document.querySelectorAll('.nav-btn[data-page]').forEach(btn => {
+  btn.addEventListener('click', () => showPage(btn.dataset.page));
+});
+
+// ============= FEED =============
+function renderFeed() {
+  const list = document.getElementById('posts-list');
+  const postCount = allPosts.filter(p => p.user_id === currentUser.id).length;
+  document.getElementById('stat-posts').textContent = postCount;
+
+  if (!allPosts.length) {
+    list.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📭</div><p>Немає постів. Будь першим! 🐗</p></div>';
+    return;
+  }
+
+  list.innerHTML = allPosts.map(post => {
+    const liked = likedPosts.has(post.id);
+    const timeAgo = formatTime(post.created_at);
+    return `
+    <div class="post-card" id="post-${post.id}">
+      <div class="post-head">
+        <div class="post-author">
+          <div class="mini-avatar" style="width:42px;height:42px;font-size:1rem">👤</div>
+          <div>
+            <div class="post-author-name">${esc(post.users?.full_name || 'Невідомий')}</div>
+            <div class="post-author-handle">@${esc(post.users?.username || 'unknown')}</div>
+          </div>
+        </div>
+        <div class="post-time">${timeAgo}</div>
+      </div>
+      <div class="post-body">${esc(post.content)}</div>
+      <div class="post-actions">
+        <button class="action-btn ${liked ? 'liked' : ''}" onclick="toggleLike('${post.id}')">
+          ${liked ? '❤️' : '🤍'} ${liked ? 'Вже лайк' : 'Подобається'} (${post.likes_count + (liked ? 1 : 0)})
+        </button>
+        <button class="action-btn" onclick="toast('Коментарі скоро! 💬')">💬 Коментувати</button>
+        <button class="action-btn" onclick="sharePost('${post.id}')">↗️ Поділитись</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function createPost(e) {
+  e.preventDefault();
+  const text = document.getElementById('post-text').value.trim();
+  if (!text) return;
+
+  const newPost = {
+    id: 'local-' + Date.now(),
+    user_id: currentUser.id,
+    content: text,
+    users: { full_name: currentUser.full_name, username: currentUser.username },
+    created_at: new Date().toISOString(),
+    likes_count: 0
+  };
+
+  allPosts.unshift(newPost);
+  document.getElementById('post-text').value = '';
+  renderFeed();
+
+  if (sb) {
+    try {
+      await sb.from('posts').insert([{ user_id: currentUser.id, content: text }]);
+    } catch(err) { console.log('Demo post saved locally'); }
+  }
+  toast('Пост опубліковано! 🐗', 'success');
+}
+
+function toggleLike(postId) {
+  if (likedPosts.has(postId)) { likedPosts.delete(postId); }
+  else { likedPosts.add(postId); }
+  renderFeed();
+}
+
+function sharePost(postId) {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(window.location.href + '#post-' + postId);
+    toast('Посилання скопійовано! 📋', 'success');
+  } else {
+    toast('Поділитись: ' + window.location.href, 'success');
+  }
+}
+
+// ============= MESSENGER =============
+let chatMessages = { ...DEMO_MESSAGES };
+
+function renderContacts() {
+  const list = document.getElementById('contacts-list');
+  list.innerHTML = allUsers.map(u => {
+    const msgs = chatMessages[u.id] || [];
+    const last = msgs[msgs.length - 1];
+    const unread = msgs.filter(m => m.sender_id !== (currentUser?.id || 'demo-user') && !m.read).length;
+    return `
+    <div class="contact-item ${selectedContact === u.id ? 'active' : ''}" onclick="selectContact('${u.id}')">
+      <div class="contact-avatar">👤</div>
+      <div style="flex:1;min-width:0">
+        <div class="contact-name">${esc(u.full_name)}</div>
+        <div class="contact-last">${last ? esc(last.content) : 'Немає повідомлень'}</div>
+      </div>
+      ${last ? `<div class="contact-time">${formatTime(last.created_at, true)}</div>` : ''}
+      ${unread > 0 ? `<div class="unread-badge">${unread}</div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+function filterContacts(q) {
+  const items = document.querySelectorAll('#contacts-list .contact-item');
+  allUsers.forEach((u, i) => {
+    const show = !q || u.full_name.toLowerCase().includes(q.toLowerCase()) || u.username.toLowerCase().includes(q.toLowerCase());
+    if (items[i]) items[i].style.display = show ? '' : 'none';
+  });
+}
+
+function selectContact(userId) {
+  selectedContact = userId;
+  renderContacts();
+  renderChatWindow();
+}
+
+function renderChatWindow() {
+  const win = document.getElementById('chat-win');
+  if (!selectedContact) {
+    win.innerHTML = '<div class="empty-chat"><div class="empty-chat-icon">💬</div><p>Оберіть контакт для чату</p></div>';
+    return;
+  }
+  const contact = allUsers.find(u => u.id === selectedContact);
+  if (!contact) return;
+  const msgs = chatMessages[selectedContact] || [];
+
+  win.innerHTML = `
+    <div class="chat-head">
+      <div class="chat-head-avatar">👤</div>
+      <div>
+        <div class="chat-head-name">${esc(contact.full_name)}</div>
+        <div class="chat-head-status">● онлайн</div>
+      </div>
+    </div>
+    <div class="messages-area" id="messages-area">
+      ${msgs.length === 0 ? '<div class="empty-state" style="flex:1;justify-content:center;display:flex;flex-direction:column;align-items:center"><div class="empty-state-icon">👋</div><p>Початок розмови</p></div>' : ''}
+      ${msgs.map(m => `
+        <div class="msg-bubble ${m.sender_id === currentUser.id ? 'sent' : 'recv'}">
+          <p>${esc(m.content)}</p>
+          <div class="msg-time">${formatTime(m.created_at, true)}</div>
+        </div>
+      `).join('')}
+    </div>
+    <div class="msg-input-area">
+      <textarea class="msg-input" id="msg-input" placeholder="Повідомлення..." rows="1"
+        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage()}"
+        oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+      <button class="btn-send" onclick="sendMessage()">➤</button>
+    </div>
+  `;
+  // Scroll to bottom
+  setTimeout(() => {
+    const area = document.getElementById('messages-area');
+    if (area) area.scrollTop = area.scrollHeight;
+  }, 50);
+}
+
+function sendMessage() {
+  const input = document.getElementById('msg-input');
+  if (!input) return;
+  const text = input.value.trim();
+  if (!text || !selectedContact) return;
+
+  if (!chatMessages[selectedContact]) chatMessages[selectedContact] = [];
+  const msg = {
+    id: 'msg-' + Date.now(),
+    sender_id: currentUser.id,
+    content: text,
+    created_at: new Date().toISOString()
+  };
+  chatMessages[selectedContact].push(msg);
+  input.value = '';
+  input.style.height = 'auto';
+  renderChatWindow();
+  renderContacts();
+
+  // Supabase
+  if (sb) {
+    sb.from('messages').insert([{ sender_id: currentUser.id, recipient_id: selectedContact, content: text }])
+      .catch(() => {});
+  }
+
+  // Auto-reply for demo
+  if (selectedContact.startsWith('u')) {
+    setTimeout(() => {
+      const replies = ['Цікаво! 😊', 'Ок, зрозуміло 👍', 'Дякую за повідомлення!', 'Домовились! ✅', 'Гарно! 🐗'];
+      const reply = {
+        id: 'reply-' + Date.now(),
+        sender_id: selectedContact,
+        content: replies[Math.floor(Math.random() * replies.length)],
+        created_at: new Date().toISOString()
+      };
+      chatMessages[selectedContact].push(reply);
+      if (selectedContact === selectedContact) renderChatWindow();
+      renderContacts();
+    }, 1000 + Math.random() * 2000);
+  }
+}
+
+// ============= EXPLORE =============
+function renderExplore() {
+  renderUsersGrid(allUsers);
+}
+
+function filterUsers(q) {
+  const filtered = q
+    ? allUsers.filter(u => u.full_name.toLowerCase().includes(q.toLowerCase()) || u.username.toLowerCase().includes(q.toLowerCase()))
+    : allUsers;
+  renderUsersGrid(filtered);
+}
+
+function renderUsersGrid(users) {
+  const grid = document.getElementById('users-grid');
+  if (!users.length) {
+    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">🔍</div><p>Нічого не знайдено</p></div>';
+    return;
+  }
+  grid.innerHTML = users.map(u => {
+    const isFollowing = followingUsers.has(u.id);
+    return `
+    <div class="user-card">
+      <div class="user-card-avatar">👤</div>
+      <div class="user-card-name">${esc(u.full_name)}</div>
+      <div class="user-card-handle">@${esc(u.username)}</div>
+      <button class="btn-follow ${isFollowing ? 'following' : ''}" onclick="toggleFollow('${u.id}', this)">
+        ${isFollowing ? '✓ Підписано' : 'Підписатись'}
+      </button>
+    </div>`;
+  }).join('');
+}
+
+function toggleFollow(userId, btn) {
+  if (followingUsers.has(userId)) {
+    followingUsers.delete(userId);
+    btn.textContent = 'Підписатись';
+    btn.classList.remove('following');
+    toast('Відписались');
+  } else {
+    followingUsers.add(userId);
+    btn.textContent = '✓ Підписано';
+    btn.classList.add('following');
+    toast('Підписались! 🎉', 'success');
+  }
+  renderRecommendations();
+}
+
+function renderRecommendations() {
+  const list = document.getElementById('reco-list');
+  const recos = allUsers.slice(0, 4);
+  list.innerHTML = recos.map(u => {
+    const isFollowing = followingUsers.has(u.id);
+    return `
+    <div class="reco-item">
+      <div>
+        <div class="reco-name">${esc(u.full_name)}</div>
+        <div class="reco-handle">@${esc(u.username)}</div>
+      </div>
+      <button class="btn-follow ${isFollowing ? 'following' : ''}" onclick="toggleFollowReco('${u.id}', this)">
+        ${isFollowing ? '✓' : 'Підписатись'}
+      </button>
+    </div>`;
+  }).join('');
+}
+
+function toggleFollowReco(userId, btn) {
+  if (followingUsers.has(userId)) {
+    followingUsers.delete(userId);
+    btn.textContent = 'Підписатись';
+    btn.classList.remove('following');
+  } else {
+    followingUsers.add(userId);
+    btn.textContent = '✓';
+    btn.classList.add('following');
+    toast('Підписались! 🎉', 'success');
+  }
+  renderExplore();
+}
+
+// ============= ADMIN =============
+function renderAdmin() {
+  // Stats
+  document.getElementById('admin-users-count').textContent = allUsers.length;
+  document.getElementById('admin-posts-count').textContent = allPosts.length;
+
+  // Chart
+  renderChart('week');
+
+  // Keys
+  renderKeys();
+
+  // Users table
+  const tbody = document.getElementById('users-table-body');
+  tbody.innerHTML = [
+    { id: 'admin-id', full_name: 'Адміністратор', username: 'kaban', email: 'admin@kaban.chat', created_at: '2024-01-01', role: 'admin' },
+    ...allUsers.slice(0, 10)
+  ].map(u => `
+    <tr>
+      <td>${esc(u.full_name)}</td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:0.82rem">@${esc(u.username)}</td>
+      <td style="color:var(--text-2);font-size:0.82rem">${esc(u.email || '—')}</td>
+      <td><span class="badge ${u.role === 'admin' ? 'badge-admin' : 'badge-user'}">${u.role === 'admin' ? 'Адмін' : 'Користувач'}</span></td>
+      <td style="color:var(--text-2);font-size:0.82rem">${u.created_at ? new Date(u.created_at).toLocaleDateString('uk-UA') : '—'}</td>
+    </tr>
+  `).join('');
+}
+
+const chartData = {
+  day: { bars: [40,60,35,75,55,80,65], labels: ['00','04','08','12','16','20','24'] },
+  week: { bars: [30,45,60,75,85,70,90], labels: ['Пн','Вт','Ср','Чт','Пт','Сб','Нд'] },
+  month: { bars: [50,65,45,80,60,75,55,85,70,65,90,80], labels: ['1','5','8','10','12','15','18','20','22','24','27','30'] },
+};
+
+function renderChart(period) {
+  const d = chartData[period];
+  document.getElementById('chart-bars').innerHTML = d.bars.map(h => `<div class="chart-bar" style="height:${h}%"></div>`).join('');
+  document.getElementById('chart-labels').innerHTML = d.labels.map(l => `<div class="chart-label">${l}</div>`).join('');
+}
+
+function setPeriod(btn, period) {
+  document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderChart(period);
+}
+
+function addKey(e) {
+  e.preventDefault();
+  const name = document.getElementById('key-name').value.trim();
+  const type = document.getElementById('key-type').value;
+  if (!name) return;
+  emailKeys.push({ id: Date.now(), key_name: name, service_type: type });
+  document.getElementById('key-name').value = '';
+  document.getElementById('key-value').value = '';
+  renderKeys();
+  toast('Ключ додано ✅', 'success');
+}
+
+function renderKeys() {
+  document.getElementById('keys-list').innerHTML = emailKeys.map(k => `
+    <div class="key-item">
+      <div>
+        <div class="key-name">${esc(k.key_name)}</div>
+        <div class="key-type">${k.service_type.toUpperCase()}</div>
+      </div>
+      <button class="btn-del" onclick="delKey(${k.id})">✕ Видалити</button>
+    </div>
+  `).join('') || '<div style="color:var(--text-2);font-size:0.88rem">Немає ключів</div>';
+}
+
+function delKey(id) {
+  emailKeys = emailKeys.filter(k => k.id !== id);
+  renderKeys();
+  toast('Ключ видалено');
+}
+
+// ============= UTILS =============
+function esc(str) {
+  return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function formatTime(iso, short = false) {
+  const d = new Date(iso);
+  const now = new Date();
+  const diff = now - d;
+  if (short) {
+    if (diff < 60000) return 'щойно';
+    if (diff < 3600000) return Math.floor(diff/60000) + 'хв';
+    if (diff < 86400000) return d.toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit' });
+    return d.toLocaleDateString('uk-UA', { day: '2-digit', month: '2-digit' });
+  }
+  if (diff < 60000) return 'щойно';
+  if (diff < 3600000) return Math.floor(diff/60000) + ' хв тому';
+  if (diff < 86400000) return Math.floor(diff/3600000) + ' год тому';
+  return d.toLocaleDateString('uk-UA', { day: 'numeric', month: 'long' });
+}
+
+let toastTimer;
+function toast(msg, type = 'info') {
+  const existing = document.querySelector('.toast');
+  if (existing) existing.remove();
+  clearTimeout(toastTimer);
+  const el = document.createElement('div');
+  el.className = 'toast ' + type;
+  el.textContent = msg;
+  document.body.appendChild(el);
+  toastTimer = setTimeout(() => { el.style.opacity = '0'; el.style.transition = 'opacity 0.3s'; setTimeout(() => el.remove(), 300); }, 3000);
+}
+
+// ============= START =============
+init();
+</script>
+</body>
 </html>
