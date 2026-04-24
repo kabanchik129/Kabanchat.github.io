@@ -40,19 +40,17 @@
     <link rel="manifest" href="/manifest.json" />
     
     <!-- Тема цвета -->
-    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f172a" />
     <meta name="color-scheme" content="dark light" />
     
-    <!-- Стиль поддержки -->
-    <meta name="supported-colorscheme" content="dark" />
+    <!-- Поддержка мобильных приложений -->
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="KabanChat" />
     
     <!-- Безопасность -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'module' https://api.anthropic.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.supabase.co https://*.supabase.co; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'module'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://peymwntazavsptycyxtp.supabase.co https://*.supabase.co; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="X-Frame-Options" content="DENY" />
     <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
@@ -60,9 +58,8 @@
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()" />
     
     <!-- Предварительная загрузка ресурсов -->
-    <link rel="preconnect" href="https://api.supabase.co" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://api.supabase.co" />
+    <link rel="preconnect" href="https://peymwntazavsptycyxtp.supabase.co" />
+    <link rel="dns-prefetch" href="https://peymwntazavsptycyxtp.supabase.co" />
     
     <!-- Структурированные данные (JSON-LD) -->
     <script type="application/ld+json">
@@ -97,15 +94,8 @@
     }
     </script>
     
-    <!-- Альтернативные языки -->
-    <link rel="alternate" hreflang="ru" href="https://kabanChat.app/" />
-    <link rel="alternate" hreflang="x-default" href="https://kabanChat.app/" />
-    
     <!-- Canonical URL -->
     <link rel="canonical" href="https://kabanChat.app/" />
-    
-    <!-- Загрузка шрифтов (опционально) -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" />
     
     <!-- Стили для предотвращения FOUC (Flash of Unstyled Content) -->
     <style>
@@ -184,27 +174,6 @@
         to { opacity: 1; }
       }
       
-      /* Поддержка темного режима */
-      @media (prefers-color-scheme: light) {
-        html {
-          background: #ffffff;
-          color: #1e293b;
-        }
-        
-        body {
-          background-color: #ffffff;
-          color: #1e293b;
-        }
-        
-        .app-loading {
-          background: #ffffff;
-        }
-        
-        .app-loading-text {
-          color: #64748b;
-        }
-      }
-      
       /* Поддержка высокого контраста */
       @media (prefers-contrast: more) {
         .app-loading-spinner {
@@ -213,7 +182,7 @@
         }
       }
       
-      /* Поддержка редуцированной анимации -->
+      /* Поддержка редуцированной анимации */
       @media (prefers-reduced-motion: reduce) {
         .app-loading-logo,
         .app-loading-spinner {
@@ -226,7 +195,7 @@
     <noscript>
       <style>
         #root::before {
-          content: "КаbanChat требует включенный JavaScript. Пожалуйста, включите JavaScript в настройках браузера.";
+          content: "KabanChat требует включенный JavaScript. Пожалуйста, включите JavaScript в настройках браузера.";
           display: flex;
           align-items: center;
           justify-content: center;
@@ -240,17 +209,6 @@
         }
       </style>
     </noscript>
-    
-    <!-- Analytics (опционально) -->
-    <!-- Раскомментируй и добавь свой Google Analytics ID -->
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=GA_ID"></script> -->
-    <!-- <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'GA_ID');
-    </script> -->
-    
   </head>
   <body>
     <!-- Главный корневой элемент для React приложения -->
@@ -267,21 +225,5 @@
     
     <!-- React приложение загружается отсюда -->
     <script type="module" src="/src/main.jsx"></script>
-    
-    <!-- Регистрация Service Worker для PWA (опционально) -->
-    <script>
-      if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js')
-            .then(registration => {
-              console.log('Service Worker registered:', registration);
-            })
-            .catch(err => {
-              console.log('Service Worker registration failed:', err);
-            });
-        });
-      }
-    </script>
-    
   </body>
 </html>
